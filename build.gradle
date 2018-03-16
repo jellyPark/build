@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
   compile 'com.google.guava:guava:18.0'
+  compile('org.springframework.boot:spring-boot-starter')
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -42,4 +43,16 @@ install {
       }
     }
   }
+}
+
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
 }
