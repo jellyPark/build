@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
-group = 'com.github.jitpack'
+group = 'com.github.jellyPark'
 
 sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
