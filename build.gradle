@@ -12,7 +12,7 @@ repositories {
 
 dependencies {
   compile 'com.google.guava:guava:18.0'
-  compile('org.springframework.boot:spring-boot-starter')
+  compile group: 'org.springframework.boot', name: "spring-boot-starter-web", version: "${springBootVersion}"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
