@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.lush.core.models.EndpointDto;
 import com.lush.core.models.EndpointModel;
+import com.lush.core.models.Response;
 
 @RestController
 public class Actuator {
@@ -38,25 +40,6 @@ public class Actuator {
   @Autowired
   private Gson gson;
 
-  // /**
-  // * Define service name.
-  // */
-  // private String serviceName = "service-example";
-  //
-  // /**
-  // * Define service type.
-  // */
-  // private String serviceType = "microservice";
-  //
-  // /**
-  // * Define service scope.
-  // */
-  // private String serviceScope = "examples";
-  //
-  // /**
-  // * Define service version.
-  // */
-  // private String serviceVersion = "master";
   /**
    * Define service name.
    */
@@ -147,5 +130,64 @@ public class Actuator {
     endpoints.setEndpoints(endpointList);
 
     return new ResponseEntity<Object>(endpoints, HttpStatus.OK);
+  }
+
+  /**
+   * Method name : healthz. Description : Check health.(application, database, redis)
+   *
+   * @return Response
+   * @throws UnknownHostException
+   */
+  @GetMapping("/healthz")
+  public Response healthz() throws UnknownHostException {
+    Response response = new Response();
+
+    // Get health data.
+    String uri = setUri("health");
+    ResponseEntity<String> health = restTemplate.getForEntity(uri, String.class);
+    JsonObject healthBody = gson.fromJson(health.getBody(), JsonObject.class);
+    String appStatus = healthBody.get("status").getAsString();
+
+    // Check status of application.
+    if (!"UP".equals(appStatus)) {
+      response.setStatus("fail");
+      response.setMessage("AppStatus is fail");
+    }
+
+    // Check status of database connection.
+    if (health.getBody().contains("db")) {
+      JsonObject temp = healthBody.get("details").getAsJsonObject();
+      temp = temp.get("db").getAsJsonObject();
+      String dbStatus = temp.get("status").getAsString();
+
+      if (!"UP".equals(dbStatus)) {
+        response.setStatus("fail");
+
+        if (!"".equals(response.getMessage())) {
+          response.setMessage(response.getMessage() + " and database status is fail");
+        } else {
+          response.setMessage("Redis status is fail");
+        }
+      }
+    }
+
+    // Check status of redis connection.
+    if (health.getBody().contains("redis")) {
+      JsonObject temp = healthBody.get("details").getAsJsonObject();
+      temp = temp.get("redis").getAsJsonObject();
+      String redisStatus = temp.get("status").getAsString();
+
+      if (!"UP".equals(redisStatus)) {
+        response.setStatus("fail");
+
+        if (!"".equals(response.getMessage())) {
+          response.setMessage(response.getMessage() + " and redis status is fail");
+        } else {
+          response.setMessage("Redis status is fail");
+        }
+      }
+    }
+
+    return response;
   }
 }
