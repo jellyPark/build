@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -106,7 +105,7 @@ public class Actuator {
    * @return ResponseEntity
    * @throws UnknownHostException
    */
-  @GetMapping("/")
+  // @GetMapping("/")
   public ResponseEntity<Object> endpoints() throws UnknownHostException {
     // Get endpoints data.
     String uri = setUri("mappings");
