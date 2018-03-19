@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,48 +38,48 @@ public class Actuator {
   @Autowired
   private Gson gson;
 
-  /**
-   * Define service name.
-   */
-  private String serviceName = "service-example";
-
-  /**
-   * Define service type.
-   */
-  private String serviceType = "microservice";
-
-  /**
-   * Define service scope.
-   */
-  private String serviceScope = "examples";
-
-  /**
-   * Define service version.
-   */
-  private String serviceVersion = "master";
   // /**
   // * Define service name.
   // */
-  // @Value("${service.name}")
-  // private String serviceName;
+  // private String serviceName = "service-example";
   //
   // /**
   // * Define service type.
   // */
-  // @Value("${service.type}")
-  // private String serviceType;
+  // private String serviceType = "microservice";
   //
   // /**
   // * Define service scope.
   // */
-  // @Value("${service.scope}")
-  // private String serviceScope;
+  // private String serviceScope = "examples";
   //
   // /**
   // * Define service version.
   // */
-  // @Value("${service.version}")
-  // private String serviceVersion;
+  // private String serviceVersion = "master";
+  /**
+   * Define service name.
+   */
+  @Value("${service.name}")
+  private String serviceName;
+
+  /**
+   * Define service type.
+   */
+  @Value("${service.type}")
+  private String serviceType;
+
+  /**
+   * Define service scope.
+   */
+  @Value("${service.scope}")
+  private String serviceScope;
+
+  /**
+   * Define service version.
+   */
+  @Value("${service.version}")
+  private String serviceVersion;
 
   /**
    * Define InetAddress for get host name. The hostname can be imported as a HttpServletRequest
