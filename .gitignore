@@ -6,3 +6,4 @@
 *.aar
 *.war
 /bin/
+/build/
