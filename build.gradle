@@ -38,3 +38,9 @@ buildscript {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     }
 }
+
+
+sourceSets.main.output.resourcesDir = sourceSets.main.output.classesDir 
+sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir
+
+
