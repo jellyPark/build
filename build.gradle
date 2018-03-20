@@ -4,17 +4,8 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management' //spring-boot-gradle-plugin
 
 group = 'com.github.jellyPark'
+archivesBaseName = 'gradle-simple'
 
-jar {
-    manifest {
-        attributes  'Title': 'gradle-simple', 'Version': '4.3', 'Main-Class': 'Hello.class'
-    }
-    archiveName 'gradle-simple.jar'
-    dependsOn configurations.runtime
-    from {
-        configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
-    }
-}
 
 sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
