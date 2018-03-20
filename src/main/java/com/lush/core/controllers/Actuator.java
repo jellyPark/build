@@ -133,7 +133,7 @@ public class Actuator {
   }
 
   /**
-   * Method name : healthz. Description : Check health.(application, database, redis)
+   * healthz Check health.(application, database, redis)
    *
    * @return Response
    * @throws UnknownHostException
@@ -190,4 +190,5 @@ public class Actuator {
 
     return response;
   }
+
 }
