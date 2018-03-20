@@ -7,9 +7,9 @@ group = 'com.github.jellyPark'
 
 jar {
     manifest {
-        attributes  'Title': 'build', 'Version': '4.1', 'Main-Class': 'Hello.class'
+        attributes  'Title': 'gradle-simple', 'Version': '4.3', 'Main-Class': 'Hello.class'
     }
-    archiveName 'build.jar'
+    archiveName 'gradle-simple.jar'
     dependsOn configurations.runtime
     from {
         configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
