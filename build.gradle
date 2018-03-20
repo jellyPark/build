@@ -5,6 +5,7 @@ apply plugin: 'io.spring.dependency-management' //spring-boot-gradle-plugin
 
 group = 'com.github.jellyPark:gradle-simple'
 archivesBaseName = 'gradle-simple'
+version = '5.1'
 
 
 sourceCompatibility = 1.8 // java 8
@@ -38,9 +39,3 @@ buildscript {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     }
 }
-
-
-sourceSets.main.output.resourcesDir = sourceSets.main.output.classesDir 
-sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir
-
-
