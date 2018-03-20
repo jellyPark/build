@@ -1,8 +1,8 @@
 *.class
-build/
+
 .gradle
 
-*.jar
+
 *.aar
 *.war
 /bin/
