@@ -11,6 +11,7 @@ targetCompatibility = 1.8
 repositories {
   mavenCentral()
   mavenLocal()
+  jcenter()
 }
 
 dependencies {
@@ -25,26 +26,34 @@ dependencies {
   compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
 }
 
-task sourcesJar(type: Jar) {
-	classifier = 'sources'
-	from sourceSets.main.allSource
+sourceSets {
+    api
+    impl
 }
 
-artifacts {
-	archives sourcesJar
-}
-
-install {
-  repositories {
-    mavenInstaller {
-      addFilter('build') {artifact, file ->
-        artifact.name == 'build'
-      }
-      //addFilter('jadx-core') {artifact, file ->
-      //  artifact.name == 'jadx-core'
-      //}
+sourceSets.all { set ->
+    def jarTask = task("${set.name}Jar", type: Jar) {
+        baseName = "$set.name"
+        from set.output
     }
-  }
+
+    artifacts {
+        archives jarTask
+    }
+}
+
+jar {
+    from sourceSets.api.output
+    from sourceSets.impl.output
+}
+
+
+// this step is necessary when installing both jars in the local maven repository
+install {
+    repositories.mavenInstaller {
+		addFilter('api') { artifact, file -> artifact.name.endsWith('api') }
+		addFilter('impl') { artifact, file -> artifact.name.endsWith('impl') }
+    }
 }
 
 buildscript {
@@ -54,6 +63,7 @@ buildscript {
     repositories {
         mavenCentral()
         mavenLocal()
+        jcenter()
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
