@@ -9,7 +9,8 @@ sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
 
 repositories {
-  mavenCentral()
+  //mavenCentral()
+  mavenLocal()
 }
 
 dependencies {
@@ -53,10 +54,10 @@ buildscript {
         springBootVersion = '2.0.0.RELEASE'
     }
     repositories {
-        mavenCentral()
+        //mavenCentral()
+        mavenLocal()
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0' // Add this line
     }
 }
