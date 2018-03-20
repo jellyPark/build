@@ -7,7 +7,7 @@ group = 'com.github.jellyPark'
 
 jar {
     manifest {
-        attributes  'Title': 'gradle-simple', 'Version': '4.0', 'Main-Class': 'Hello.class'
+        attributes  'Title': 'build', 'Version': '4.1', 'Main-Class': 'Hello.class'
     }
     archiveName 'gradle-simple.jar'
     dependsOn configurations.runtime
