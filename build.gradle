@@ -9,7 +9,7 @@ jar {
     manifest {
         attributes  'Title': 'build', 'Version': '4.1', 'Main-Class': 'Hello.class'
     }
-    archiveName 'gradle-simple.jar'
+    archiveName 'build.jar'
     dependsOn configurations.runtime
     from {
         configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
